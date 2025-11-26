@@ -1,27 +1,113 @@
 # Smart Farm E-Commerce
 
-## Setup
+A full-stack e-commerce application for rare plants, featuring a React frontend, FastAPI backend, and automated web scraping capabilities.
+
+## 🚀 Features
+
+### Storefront
+- **Responsive Design**: Beautiful, mobile-friendly UI inspired by premium plant shops.
+- **Product Catalog**: Browse rare tropical plants and succulents with rich details.
+- **Shopping Cart**: Full cart functionality with quantity management and stock validation.
+- **Smart Search**: (Coming soon) Filter by category, price, and more.
+
+### Admin Dashboard
+- **Inventory Management**: Add, edit, and delete products with ease.
+- **Auto-Generated IDs**: Smart ID generation based on product categories (e.g., `PL-1001` for plants).
+- **Image Management**: 
+  - Upload images directly from your computer.
+  - **Auto-Find Missing Images**: One-click feature to search and download images from the web for products missing them.
+- **Rich Data**: Manage botanical names, families, care instructions, and more.
+
+### Backend & Data
+- **FastAPI**: High-performance Python backend.
+- **SQLite Database**: Zero-configuration database setup.
+- **Web Scraper**: Automated scraping from multiple sources:
+  - Steve's Leaves (Tropical plants)
+  - Cactus Art (Cacti)
+  - Llifle (Encyclopedia entries)
+- **Image Handling**: Local image storage and serving.
+
+## 🛠️ Setup Guide
 
 ### Backend
-1. Navigate to `backend` directory.
-2. Create a virtual environment: `python3 -m venv venv`
-3. Activate it: `source venv/bin/activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Set up your database. The project uses SQLite by default, so no extra setup is needed.
-   - Default: `sqlite:///./smartfarm.db`
-6. Run the server: `uvicorn main:app --reload`
+1. Navigate to the `backend` directory:
+   ```bash
+   cd backend
+   ```
+2. Create and activate a virtual environment (recommended):
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the server:
+   ```bash
+   uvicorn main:app --reload
+   ```
+   The API will be available at `http://localhost:8000`.
 
 ### Frontend
-1. Navigate to `frontend` directory.
-2. Install dependencies: `npm install`
-3. Run the development server: `npm run dev`
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   The application will be available at `http://localhost:5174` (or similar).
 
-### Scraper
-To populate the database with products from Steve's Leaves, Cactus Art, and Llifle:
-1. Ensure the backend is configured and database is running.
-2. Run: `python populate_db.py` inside the `backend` directory.
+### 📦 Populating Data
+To populate your store with initial products:
 
-## Features
-- **Storefront**: Browse products, view details, add to cart.
-- **Admin UI**: Manage inventory (Add/Edit/Delete products).
-- **Scraper**: Automated product catalog population.
+1. Make sure you are in the `backend` directory.
+2. Run the population script:
+   ```bash
+   python3 populate_db.py
+   ```
+   This will:
+   - Scrape data from configured websites.
+   - Download product images locally.
+   - Populate the SQLite database.
+
+### 📸 Managing Images
+If you have products without images:
+1. Go to the Admin Panel: `http://localhost:5174/admin`
+2. Click the **"Auto-Find Missing Images"** button.
+3. The system will automatically search DuckDuckGo, download the best matching images, and update your products.
+
+## 🏗️ Project Structure
+
+```
+Smart Farm/
+├── backend/
+│   ├── images/          # Locally stored product images
+│   ├── main.py          # FastAPI application & endpoints
+│   ├── models.py        # SQLAlchemy database models
+│   ├── schemas.py       # Pydantic models
+│   ├── crud.py          # Database operations
+│   ├── database.py      # Database connection
+│   ├── scraper.py       # Web scraping logic
+│   ├── image_finder.py  # Image search utility
+│   └── populate_db.py   # Data population script
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/  # Reusable UI components (Navbar, ProductCard)
+│   │   ├── pages/       # Page components (Home, Admin)
+│   │   ├── context/     # React Context (CartContext)
+│   │   └── api.js       # API client functions
+│   └── ...
+│
+└── README.md
+```
+
+## 📝 License
+This project is for educational purposes.

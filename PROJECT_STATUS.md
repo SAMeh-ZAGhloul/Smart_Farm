@@ -56,10 +56,17 @@ PL-1001: Monstera siltepecana
    - Generates detailed descriptions and care instructions
    - Handles multiple sources with different ID prefixes
 
-2. **Updated API** (`backend/main.py`)
+2. **Image Finder Utility** (`backend/image_finder.py`)
+   - **Auto-finds images** for products missing them
+   - Uses DuckDuckGo Search to find relevant images
+   - Downloads and saves images locally
+   - Integrated into Admin UI for easy one-click updates
+
+3. **Updated API** (`backend/main.py`)
    - Serves images via `/images/` endpoint
    - Full CRUD operations for all new fields
    - CORS enabled for all localhost ports
+   - New endpoint `/find-missing-images`
 
 3. **Improved Frontend**
    - Product cards show product IDs, botanical names, descriptions

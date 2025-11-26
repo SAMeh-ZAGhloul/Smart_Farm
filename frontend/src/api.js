@@ -37,3 +37,10 @@ export const getNextProductId = async (category = 'PL') => {
     const response = await axios.get(`${API_URL}/next-product-id?category=${category}`);
     return response.data;
 };
+
+export const findMissingImages = async (limit = 5) => {
+    const response = await axios.post(`${API_URL}/find-missing-images?limit=${limit}`, {}, {
+        timeout: 60000 // 60 seconds timeout
+    });
+    return response.data;
+};

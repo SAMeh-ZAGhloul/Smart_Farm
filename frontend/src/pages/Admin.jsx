@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { fetchProducts, createProduct, updateProduct, deleteProduct, uploadImage, getNextProductId } from '../api';
+import { fetchProducts, createProduct, updateProduct, deleteProduct, uploadImage, getNextProductId, findMissingImages } from '../api';
 
 const Admin = () => {
     const [products, setProducts] = useState([]);
@@ -19,6 +19,7 @@ const Admin = () => {
     });
     const [editingId, setEditingId] = useState(null);
     const [uploading, setUploading] = useState(false);
+    const [findingImages, setFindingImages] = useState(false);
     const fileInputRef = useRef(null);
 
     useEffect(() => {
@@ -29,6 +30,20 @@ const Admin = () => {
     const loadProducts = async () => {
         const data = await fetchProducts();
         setProducts(data);
+    };
+
+    const handleFindImages = async () => {
+        setFindingImages(true);
+        try {
+            const results = await findMissingImages(5);
+            alert(`Processed ${results.length} products. Check console for details.`);
+            console.log(results);
+            loadProducts();
+        } catch (error) {
+            alert('Error finding images: ' + error.message);
+        } finally {
+            setFindingImages(false);
+        }
     };
 
     const generateProductId = async () => {
@@ -108,7 +123,16 @@ const Admin = () => {
 
     return (
         <div className="container" style={{ padding: '2rem 1rem' }}>
-            <h1 style={{ marginBottom: '2rem' }}>Inventory Management</h1>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                <h1 style={{ margin: 0 }}>Inventory Management</h1>
+                <button
+                    onClick={handleFindImages}
+                    className="btn btn-secondary"
+                    disabled={findingImages}
+                >
+                    {findingImages ? 'Searching...' : 'Auto-Find Missing Images'}
+                </button>
+            </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
                 <div className="card" style={{ padding: '1.5rem', height: 'fit-content' }}>

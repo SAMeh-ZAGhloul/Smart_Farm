@@ -106,6 +106,13 @@ def get_next_product_id(category: str = "PL", db: Session = Depends(get_db)):
     
     return {"product_id": f"{category}-{max_num + 1}"}
 
+@app.post("/find-missing-images")
+def find_images(limit: int = 5):
+    """Find and download images for products that don't have one"""
+    from image_finder import find_missing_images
+    results = find_missing_images(limit)
+    return results
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Smart Farm API"}
