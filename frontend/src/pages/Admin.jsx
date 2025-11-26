@@ -34,11 +34,37 @@ const Admin = () => {
 
     const handleFindImages = async () => {
         setFindingImages(true);
+        let totalProcessed = 0;
+        let batchCount = 0;
+
         try {
-            const results = await findMissingImages(5);
-            alert(`Processed ${results.length} products. Check console for details.`);
-            console.log(results);
-            loadProducts();
+            // Process in batches of 5 until no more are found or we hit a safety limit
+            while (true) {
+                const results = await findMissingImages(5);
+
+                if (results.length === 0 || (results.message && results.message.includes("No products"))) {
+                    break;
+                }
+
+                totalProcessed += results.length;
+                batchCount++;
+
+                // Update UI to show progress (optional, but good for UX)
+                console.log(`Batch ${batchCount}: Processed ${results.length} images`);
+
+                // Refresh list to show new images immediately
+                await loadProducts();
+
+                // Safety break to prevent infinite loops if something goes wrong
+                if (batchCount > 20) break;
+            }
+
+            if (totalProcessed > 0) {
+                alert(`Success! Found and downloaded ${totalProcessed} new images.`);
+            } else {
+                alert('No missing images found. All products have images!');
+            }
+
         } catch (error) {
             alert('Error finding images: ' + error.message);
         } finally {
