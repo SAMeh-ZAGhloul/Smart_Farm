@@ -7,8 +7,16 @@ A full-stack e-commerce application for rare plants, featuring a React frontend,
 ### Storefront
 - **Responsive Design**: Beautiful, mobile-friendly UI inspired by premium plant shops.
 - **Product Catalog**: Browse rare tropical plants and succulents with rich details.
-- **Shopping Cart**: Full cart functionality with quantity management and stock validation.
-- **Smart Search**: (Coming soon) Filter by category, price, and more.
+- **Product Details**: Immersive modal view with high-res images and detailed descriptions.
+- **Shopping Cart**: 
+  - Persistent cart (saves to local storage).
+  - Quantity management and stock validation.
+  - Slide-out cart drawer.
+- **Checkout Flow**: 
+  - Integrated checkout page with shipping and payment forms.
+  - Discount code support (Try `SAVE10`!).
+  - Automatic shipping calculation.
+  - Order confirmation email simulation.
 
 ### Admin Dashboard
 - **Inventory Management**: Add, edit, and delete products with ease.
@@ -100,8 +108,8 @@ Smart Farm/
 │
 ├── frontend/
 │   ├── src/
-│   │   ├── components/  # Reusable UI components (Navbar, ProductCard)
-│   │   ├── pages/       # Page components (Home, Admin)
+│   │   ├── components/  # Reusable UI components (Navbar, ProductCard, ProductDetailModal)
+│   │   ├── pages/       # Page components (Home, Admin, Checkout)
 │   │   ├── context/     # React Context (CartContext)
 │   │   └── api.js       # API client functions
 │   └── ...
