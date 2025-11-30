@@ -109,5 +109,3 @@ Smart Farm/
 └── README.md
 ```
 
-## 📝 License
-This project is for educational purposes.
