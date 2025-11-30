@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 
 class ProductBase(BaseModel):
     product_id: Optional[str] = None
@@ -36,3 +36,18 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+class OrderItem(BaseModel):
+    product_id: int
+    quantity: int
+    price: float
+    name: str
+
+class OrderCreate(BaseModel):
+    email: str
+    name: str
+    address: str
+    city: str
+    zip: str
+    items: List[OrderItem]
+    total: float

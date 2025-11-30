@@ -113,6 +113,20 @@ def find_images(limit: int = 5):
     results = find_missing_images(limit)
     return results
 
+@app.post("/send-order-email")
+def send_order_email(order: schemas.OrderCreate):
+    """Simulate sending an order confirmation email"""
+    print(f"--- Sending Email to {order.email} ---")
+    print(f"Subject: Order Confirmation for {order.name}")
+    print(f"Dear {order.name},")
+    print(f"Thank you for your order! We will ship it to {order.address}, {order.city} {order.zip}.")
+    print("Order Details:")
+    for item in order.items:
+        print(f"- {item.name} x {item.quantity}: ${item.price * item.quantity:.2f}")
+    print(f"Total: ${order.total:.2f}")
+    print("---------------------------------------")
+    return {"message": "Email sent successfully"}
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Smart Farm API"}

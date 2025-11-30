@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onClick }) => {
     const { addToCart } = useCart();
     const imageUrl = product.image_path
         ? `http://localhost:8000/${product.image_path}`
@@ -23,8 +23,10 @@ const ProductCard = ({ product }) => {
                 position: 'relative',
                 height: '280px',
                 overflow: 'hidden',
-                backgroundColor: '#f9fafb'
-            }}>
+                backgroundColor: '#f9fafb',
+                cursor: 'pointer'
+            }}
+                onClick={onClick}>
                 {imageUrl ? (
                     <img
                         src={imageUrl}
@@ -103,8 +105,10 @@ const ProductCard = ({ product }) => {
                     fontWeight: '600',
                     lineHeight: '1.4',
                     color: 'var(--text)',
-                    minHeight: '2.8rem'
-                }}>
+                    minHeight: '2.8rem',
+                    cursor: 'pointer'
+                }}
+                    onClick={onClick}>
                     {product.name}
                 </h3>
 

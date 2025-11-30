@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Admin from './pages/Admin';
+import Checkout from './pages/Checkout';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </main>
           <footer style={{ backgroundColor: '#1f2937', color: 'white', padding: '2rem 0', textAlign: 'center' }}>

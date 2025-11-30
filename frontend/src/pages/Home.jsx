@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { fetchProducts } from '../api';
 import ProductCard from '../components/ProductCard';
 
+import ProductDetailModal from '../components/ProductDetailModal';
+
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -45,9 +48,20 @@ const Home = () => {
             ) : (
                 <div className="grid grid-cols-1">
                     {products.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onClick={() => setSelectedProduct(product)}
+                        />
                     ))}
                 </div>
+            )}
+
+            {selectedProduct && (
+                <ProductDetailModal
+                    product={selectedProduct}
+                    onClose={() => setSelectedProduct(null)}
+                />
             )}
         </div>
     );

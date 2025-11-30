@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, User, X, Menu, Search } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 
 const Navbar = () => {
+    const navigate = useNavigate();
     const { cart, getCartCount, getCartTotal, removeFromCart, updateQuantity } = useCart();
     const [showCart, setShowCart] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -310,7 +311,10 @@ const Navbar = () => {
                                     <button
                                         className="btn btn-primary"
                                         style={{ width: '100%', padding: '1rem', fontSize: '1rem', fontWeight: '600' }}
-                                        onClick={() => alert('Checkout functionality coming soon!')}
+                                        onClick={() => {
+                                            setShowCart(false);
+                                            navigate('/checkout');
+                                        }}
                                     >
                                         Proceed to Checkout
                                     </button>
