@@ -63,6 +63,57 @@ const Home = () => {
                     onClose={() => setSelectedProduct(null)}
                 />
             )}
+
+            {/* About Us Section */}
+            <section style={{ marginTop: '6rem', marginBottom: '4rem' }}>
+                <div style={{
+                    backgroundColor: 'var(--secondary)',
+                    borderRadius: '2rem',
+                    padding: '4rem 2rem',
+                    textAlign: 'center'
+                }}>
+                    <h2 style={{ fontSize: '2.5rem', color: 'var(--primary-dark)', marginBottom: '1.5rem' }}>About Smart Farm</h2>
+                    <p style={{
+                        maxWidth: '800px',
+                        margin: '0 auto',
+                        fontSize: '1.1rem',
+                        lineHeight: '1.8',
+                        color: 'var(--primary-dark)'
+                    }}>
+                        We are passionate about bringing the beauty of nature into your home.
+                        Our team of botanists and plant enthusiasts curates the finest selection of rare and exotic plants from around the world.
+                        We believe that every plant has a story, and we're here to help you start your own green journey.
+                    </p>
+                </div>
+            </section>
+
+            {/* Why Choose Us */}
+            <section style={{ marginBottom: '6rem' }}>
+                <h2 style={{ textAlign: 'center', fontSize: '2rem', color: 'var(--text)', marginBottom: '3rem' }}>Why Choose Us</h2>
+                <div className="grid grid-cols-1" style={{ gap: '2rem' }}>
+                    {[
+                        { title: 'Expertly Curated', desc: 'Hand-picked by our team of expert botanists for health and beauty.' },
+                        { title: 'Sustainable Sourcing', desc: 'We partner with eco-friendly growers who prioritize the planet.' },
+                        { title: 'Care Support', desc: 'Lifetime support from our plant doctors for every plant you buy.' },
+                        { title: 'Safe Shipping', desc: 'Specialized packaging ensures your plants arrive happy and healthy.' }
+                    ].map((item, index) => (
+                        <div key={index} className="card" style={{ padding: '2rem', textAlign: 'center' }}>
+                            <h3 style={{ color: 'var(--primary)', marginBottom: '1rem', fontSize: '1.25rem' }}>{item.title}</h3>
+                            <p style={{ color: 'var(--text-light)' }}>{item.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            {/* Newsletter */}
+            <section style={{ marginBottom: '4rem', textAlign: 'center' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Join Our Community</h2>
+                <p style={{ color: 'var(--text-light)', marginBottom: '2rem' }}>Get plant care tips, new arrival alerts, and exclusive discounts.</p>
+                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', maxWidth: '500px', margin: '0 auto' }}>
+                    <input type="email" placeholder="Enter your email" style={{ marginBottom: 0 }} />
+                    <button className="btn btn-primary">Subscribe</button>
+                </div>
+            </section>
         </div>
     );
 };
